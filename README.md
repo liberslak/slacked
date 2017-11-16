@@ -1,3 +1,3 @@
-# slacked
+# Slacked
 
 Playing with Slackware -current.
