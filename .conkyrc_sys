@@ -1,0 +1,146 @@
+# Slackware Conky Google Now Dark style #
+
+# Conky settings #
+background no
+update_interval 2
+double_buffer yes
+no_buffers yes
+
+# Window specifications #
+own_window yes
+own_window_class Conky
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar
+own_window_transparent no
+own_window_argb_visual yes
+own_window_argb_value 150
+
+minimum_size 234
+maximum_width 234
+
+# Alignment #
+alignment top_left
+gap_x 1110
+gap_y 52
+
+border_inner_margin 15
+border_outer_margin 0
+
+# Graphics settings #
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+xftalpha 0.2
+xftfont Open Sans Light:size=10
+# xftfont pftempestafivecondensed:size=12
+
+override_utf8_locale yes
+
+imlib_cache_size 0
+
+# show_graph_range
+# show_graph_scale
+
+# Color scheme - Tango Palette #
+default_color BABDB6 # aluminium
+
+color1 C4A000 # butter
+color2 CE5C00 # orange
+color3 8F5902 # chocolate
+color4 FFFFFF # blanco
+color5 204A87 # skyblue
+color6 5C3566 # Plum
+color7 CC0000 # scarlet red
+color8 BABDB6 # aluminium
+color9 A23436 # oil
+color0 55ff00 # green
+
+TEXT
+### FECHA
+#${alignr}${color4}${font}${time %a %d %b %Y}${color}${font}${voffset 10}
+${voffset -5}${alignr}${color4}${font Open Sans Light:size=14:bold}${time %a %d }${font}${time %b %Y}${color}${voffset 10}
+#${voffset -5}${alignr}${color4}${font Open Sans Light:size=14:bold}${time %a %d }${font}${time %B}${color}${font}${voffset 10}
+###
+### DISTRO GNU/LINUX
+#${alignr}${color}${exec grep "^ID=" /etc/os-release | sed -e "s/^ID=\(.*\)$/\1/g" | sed -r "s/\b(.)/\U\1/g"} ${sysname} ${exec grep "^VERSION_ID=" /etc/os-release | sed -e "s/^VERSION_ID=\(.*\)$/\1/g"}${color}${font} -current
+${alignr}${color}${exec grep "^ID=" /etc/os-release | sed -e "s/^ID=\(.*\)$/\1/g" | sed -r "s/\b(.)/\U\1/g"} ${sysname}${color}${font} -current
+###
+### VERSIÓN DE KERNEL Y ARQUITECTURA
+${alignr}${color}kernel generic ${kernel}${color}  ${color}(${machine} bits${color})
+###
+### REPOSITORIOS ACTUALIZADOS
+#${alignr}${color0}${if_match "${words /home/liber/.slackpkg/updated-repos.txt}"=="0"}Sistema actualizado${else}${color}[ ${color2}${execi 1800 cat /home/liber/.slackpkg/updated-repos.txt | sed 's/alienbob/alien /;s/slackware/current /;s/ktown/ktown /;s/multilib/multi /;s/restricted/restr /;s/slackpkgplus/slpkg+ /' | sed '$!N;s/\n//;$!N;s/\n//;$!N;s/\n//;'}${color}]${endif}${voffset -10}
+${alignr}${color0}${if_match "${words /home/liber/.slackpkg/updated-repos.txt}"=="0"}Sistema actualizado${else}${color}[ ${color2}Actualizaciones disponibles ${color}]${endif}${voffset -10}
+#
+#${alignr}${color}[ ${color2}current alien multi ktown restrict slpkg+ ${color}]
+###
+### GRÁFICO DE CPU
+${alignr}${cpugraph 20,230 BABDB6 204A87 -t}${color}${voffset -4}
+###
+### ESTADO DEL SISTEMA
+# ${uptime_short}${alignr} ${color}${loadavg}
+${uptime}${alignr}${color4}${hwmon temp 2}°C  |  ${color4}${hwmon temp 3}°C
+#${uptime}${alignr} ${color}${loadavg}
+${color}${cpu cpu0}${color} %        ${color}${freq_g 0}${color} Ghz ${alignr} ${color}${exec ps -U liber | wc -l}${color} Us | ${color}${exec ps aux | wc -l} Ps${voffset 6}
+###
+### MEMORIA
+# ${membar 8}${color}
+#Ram ${alignr}${color}${mem}${color} de ${color}${memmax}${color} - ${color}${memperc}%
+Ram ${alignr}${color}${mem}${color} ${membar 7,90}${color}   ${color}${memperc}%
+###
+### DISCOS
+# ${fs_bar 8 /}${color}
+#Slack ${alignr}${color}${fs_used /}${color} de ${color}${fs_size /}${color} - ${color}${fs_used_perc /}%${voffset 10}
+Slack ${alignr}${color}${fs_used /}${color} ${fs_bar 7,90 /}${color}   ${color}${fs_used_perc /}%
+Datos ${alignr}${color}${fs_used /DATOS}${color} ${fs_bar 7,90 /DATOS}${color}   ${color}${fs_used_perc /DATOS}%${voffset 5}
+###
+###PROCESOS
+${voffset 12}${color4}PROCESOS ${goto 140}${color}MEM${alignr}
+${top_mem name 1}${alignr}${top_mem mem 1}
+${top_mem name 2}${alignr}${top_mem mem 2}
+${top_mem name 3}${alignr}${top_mem mem 3}
+
+PROCESOS ${goto 140}CPU ${alignr}
+${top name 1}${alignr}${top cpu 1}
+${top name 2}${alignr}${top cpu 2}
+${top name 3}${alignr}${top cpu 3}
+###
+### RED
+${if_up wlan0}${voffset 25}${color4}RED ${color4}${wireless_essid wlan0} ${alignr}${color4}${wireless_link_qual_perc wlan0}%
+${color}${addr wlan0}${color}${alignr}${color}${execi 3480 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1 | sed 's/^ *//g'}
+${downspeedgraph wlan0 20,230 BABDB6 204A87 -t}${voffset -8}
+${color}Tasa: ${color4}${downspeed wlan0}${alignr}${color}Recibido: ${color}${totaldown wlan0}
+${upspeedgraph wlan0 20,230 204A87 BABDB6 -t}${color}${voffset -8}
+${color}Tasa: ${color4}${upspeed wlan0}${color}${alignr}Enviado: ${color}${totalup wlan0}${color4}${else}${voffset 20}RED CABLEADA${alignr}${color}Ethernet RJ45
+${color}${addr eth0}${color}${alignr}${color}${execi 3480 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1 | sed 's/^ *//g'}
+${downspeedgraph eth0 20,230 BABDB6 204A87 -t}${color}{voffset -8}
+${color}Tasa : ${color4}${downspeed eth0}${color}${alignr}${color}Total Recibido: ${color}${totaldown eth0}
+${upspeedgraph eth0 20,230 204A87 BABDB6 -t}${color}${voffset -8}
+${color}Tasa: ${color4}${upspeed eth0}${color}${alignr}Total Enviado: ${color}${totalup eth0}${color}${endif}
+###
+
+### CONEXIONES DE RED
+CONEXIONES  ( ${tcp_portmon 1 65535 count} )${color}
+${tcp_portmon 1 65535 rhost 0}${alignr}${tcp_portmon 1 65535 rport 0}
+${tcp_portmon 1 65535 rhost 1}${alignr}${tcp_portmon 1 65535 rport 1}
+${tcp_portmon 1 65535 rhost 2}${alignr}${tcp_portmon 1 65535 rport 2}
+${tcp_portmon 1 65535 rhost 3}${alignr}${tcp_portmon 1 65535 rport 3}
+${tcp_portmon 1 65535 rhost 4}${alignr}${tcp_portmon 1 65535 rport 4}
+# ${tcp_portmon 1 65535 rhost 5}${alignr}${tcp_portmon 1 65535 rport 5}
+# ${tcp_portmon 1 65535 rhost 6}${alignr}${tcp_portmon 1 65535 rport 6}
+# ${tcp_portmon 1 65535 rhost 7}${alignr}${tcp_portmon 1 65535 rport 7}
+# ${tcp_portmon 1 65535 rhost 8}${alignr}${tcp_portmon 1 65535 rport 8}
+# ${tcp_portmon 1 65535 rhost 9}${alignr}${tcp_portmon 1 65535 rport 9}
+###
+
+### MÚSICA - MOCP
+${if_running mocp}${voffset 1}${color4}MÚSICA ${color4}- ${moc_state}${alignr}${color}${moc_bitrate}${color}
+${color}${moc_song}
+${color}${moc_artist}
+${color}${moc_album}
+${voffset 7}${color}${alignr}${moc_curtime} - ${moc_totaltime} (${moc_timeleft})${endif}${voffset -15}
+###

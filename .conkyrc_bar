@@ -1,0 +1,79 @@
+# Slackware Conky Google Now Dark style #
+
+# Conky settings #
+background no
+update_interval 1
+double_buffer yes
+no_buffers yes
+
+# Window specifications #
+own_window yes
+own_window_class Conky
+# own_window_type normal
+own_window_type panel
+# own_window_hints undecorated,below,sticky,skip_taskbar
+own_window_hints undecorated,above,sticky,skip_taskbar
+own_window_transparent no
+own_window_argb_visual yes
+own_window_argb_value 80
+
+# minimum_size 1080
+# maximum_width 1080
+# minimum_size 1150
+# maximum_width 1150
+minimum_size 1248
+maximum_width 1248
+
+# Alignment #
+alignment top_left
+gap_x 32
+gap_y 5
+
+border_inner_margin 0
+border_outer_margin 0
+
+# Graphics settings #
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+# xftalpha 0.2
+xftfont Open Sans Light:size=10
+# xftfont pftempestafivecondensed:size=12
+
+override_utf8_locale yes
+
+imlib_cache_size 0
+
+# Color scheme - Tango Palette #
+default_color BABDB6 # aluminium
+
+color1 C4A000 # butter
+color2 CE5C00 # orange
+color3 8F5902 # chocolate
+#color4 4E9A06 # chamemelon
+color4 FFFFFF # blanco
+color5 204A87 # skyblue
+color6 5C3566 # Plum
+color7 CC0000 # scarlet red
+color8 BABDB6 # aluminium
+# color9 A23436 # oil
+color9 #7707FF # purple Slackware
+# color0 55FF00 # green
+# color0 388910
+color0 91dc5a
+# color0 cdff96
+
+# use_spacer right
+
+TEXT
+# BARRA (SOBRE EL PANEL) DE INFORMACIÓN CON ICONOS
+# ${font Open Sans Light:size=10}${color4}${goto 8}${if_match ${desktop}==1}${color0}${endif}Inicio${color4}${goto 57}${if_match ${desktop}==2}${color0}${endif}Web${color4}${goto 102}${if_match ${desktop}==3}${color0}${endif}Local${color4}${goto 147}${if_match ${desktop}==4}${color0}${endif}Extra${color4}${goto 193}${if_match ${desktop}==5}${color0}${endif}Win32${color4}${goto 240}${if_match ${desktop}==6}${color0}${endif}Media${color4}${goto 288}${if_match ${desktop}==7}${color0}${endif}Texto${color4}${goto 337}${if_match ${desktop}==8}${color0}${endif}Bash${color0}${font}${color4}${font Monospace:size=10}${color0} ${image /home/liber/Iconos/cpu2.png -p 874,0 -s 16x16}  ${goto 902}${color4}${cpu cpu0}%   ${color0} ${image /home/liber/Iconos/temp2.png -p 930,0 -s 16x16} ${goto 958}${color4}${hwmon temp 3}°C ${if_up wlan0}${color0}  ${image /home/liber/Iconos/down2.png -p 1000,0 -s 16x16}  ${goto 1030}${color4}${downspeed wlan0}${color0}${else}${color0}${image /home/liber/Iconos/down2.png -p 1000,0 -s 16x16} ${goto 1030}${color4}${downspeed eth0}${color0} ${endif}
+###
+# ${image /home/liber/Iconos/audio2.png -p 994,0 -s 16x16} ${goto 1024}${color4}${exec amixer -M get Master | grep "Front Left": | cut -d " " -f7 | sed -e 's/^.//' -e 's/.$//'}
+# ${image /home/liber/Iconos/wifi2.png -p 994,0 -s 16x16} ${goto 1024}${color4}${wireless_link_qual_perc wlan0}%
+# ${image /home/liber/Iconos/clock2.png -p 1156,0 -s 16x16} ${voffset -3}${goto 1184}${font Open Sans Light:size=12:bold}${color4}${time %H:%M:%S}
+${font Open Sans Light:size=10}${color4}${goto 8}${if_match ${desktop}==1}${color0}${endif}Inicio${color4}${goto 57}${if_match ${desktop}==2}${color0}${endif}Web${color4}${goto 102}${if_match ${desktop}==3}${color0}${endif}Local${color4}${goto 149}${if_match ${desktop}==4}${color0}${endif}Extra${color4}${goto 193}${if_match ${desktop}==5}${color0}${endif}Win32${color4}${goto 240}${if_match ${desktop}==6}${color0}${endif}Media${color4}${goto 288}${if_match ${desktop}==7}${color0}${endif}Texto${color4}${goto 337}${if_match ${desktop}==8}${color0}${endif}Bash${color0}${font}${color4}${font Monospace:size=10}${color0} ${image /home/liber/Iconos/cpu2.png -p 874,0 -s 16x16}  ${goto 902}${color4}${cpu cpu0}%   ${color0} ${image /home/liber/Iconos/temp2.png -p 936,0 -s 16x16} ${goto 964}${color4}${hwmon temp 3}°C ${color0}   ${color0} ${image /home/liber/Iconos/audio2.png -p 1008,0 -s 16x16} ${goto 1038}${color4}${exec amixer -M get Master | grep "Front Left": | cut -d " " -f7 | sed -e 's/^.//' -e 's/.$//'}   ${if_up wlan0}${color0}${image /home/liber/Iconos/down2.png -p 1074,0 -s 16x16} ${goto 1104}${color4}${downspeed wlan0}   ${color0}${else}${color0}${image /home/liber/Iconos/down2.png -p 1074,0 -s 16x16} ${goto 1104} ${color4}${downspeed eth0}${color0}${endif}   ${voffset -3}${goto 1179}${font Open Sans Light:size=12:bold}${color4}${time %H:%M:%S}

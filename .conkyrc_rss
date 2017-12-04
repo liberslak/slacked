@@ -1,0 +1,126 @@
+# Slackware Conky Google Now Dark style #
+
+# Conky settings #
+background no
+update_interval 57
+double_buffer yes
+no_buffers yes
+
+# Window specifications #
+own_window yes
+own_window_class Conky
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar
+own_window_transparent no
+own_window_argb_visual yes
+own_window_argb_value 150
+
+minimum_size 834
+maximum_width 298
+
+# Alignment #
+alignment top_left
+gap_x 770
+gap_y 54
+
+border_inner_margin 17
+border_outer_margin 0
+
+# Graphics settings #
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+xftalpha 0.2
+xftfont Open Sans Light:size=10
+# xftfont pftempestafivecondensed:size=12
+
+override_utf8_locale yes
+
+imlib_cache_size 0
+
+# Color scheme - Tango Palette #
+default_color BABDB6 # aluminium
+
+color1 C4A000 # butter
+color2 CE5C00 # orange
+color3 8F5902 # chocolate
+#color4 4E9A06 # chamemelon
+color4 FFFFFF # gris
+color5 204A87 # skyblue
+color6 5C3566 # Plum
+color7 CC0000 # scarlet red
+color8 BABDB6 # aluminium
+color9 A23436 # oil
+color0 55ff00 # green
+
+TEXT
+### ESTADO
+${voffset -4}${alignr}${color}${if_match "${words /home/liber/.slackpkg/updated-repos.txt}"=="0"}No hay actualizaciones${voffset 10} ${else}${color}Actualizar sistema
+${alignr}${color}[ ${color2}${execi 1680 cat /home/liber/.slackpkg/updated-repos.txt | sed 's/alienbob/alien /;s/slackware/current /;s/ktown/ktown /;s/multilib/multilib /;s/restricted/restricted /;s/slackpkgplus/slackpkg+ /' | sed '$!N;s/\n//;$!N;s/\n//;$!N;s/\n//;$!N;s/\n//;'}${color}]
+${endif}${voffset -5}
+# ${voffset -4}${alignr}${color}Actualizar sistema 
+# ${alignr}[ ${color2}current alien multilib ktown restricted slackpkg+ ${color}]${voffset -5}
+### SLACKWARE CURRENT
+${color4}CURRENT${voffset 2}
+${color8}${execi 1800 cat /home/liber/Sistema/Scripts/Changelog.txt | head -n 1}${voffset 10}
+#${color5}${rss https://slackbuilds.org/mirror/rss/slackware64-current.rss 29 feed_title}${voffset 10}
+#{color8}${rss https://slackbuilds.org/mirror/rss/slackware64-current.rss 30 item_titles 1}${voffset 10}
+#${color8}${rss https://slackbuilds.org/mirror/rss/slackware64-current.rss 30 item_title 2}${voffset 10}
+#${color8}${rss https://slackbuilds.org/mirror/rss/slackware64-current.rss 30 item_title 3}${voffset 10}
+###
+### ALIENBOB
+${color4}ALIENBOB${voffset 2}
+#${color5}${rss http://www.slackware.com/~alien/slackbuilds/ChangeLog.rss 30 feed_title}${voffset 10}
+${color8}${rss http://www.slackware.com/~alien/slackbuilds/ChangeLog.rss 29 item_titles 1}${voffset 10}
+#${color8}${rss http://www.slackware.com/~alien/slackbuilds/ChangeLog.rss 30 item_title 2}${voffset 10}
+#${color8}${rss http://www.slackware.com/~alien/slackbuilds/ChangeLog.rss 30 item_title 3}${voffset 10}
+###
+### MULTILIB
+${color4}MULTILIB${voffset 2}
+#${color5}${rss http://connie.slackware.com/~alien/multilib/ChangeLog.rss 30 feed_title}${voffset 10}
+${color8}${rss http://connie.slackware.com/~alien/multilib/ChangeLog.rss 29 item_titles 1}${voffset 10}
+#${color8}${rss http://connie.slackware.com/~alien/multilib/ChangeLog.rss 30 item_title 2}${voffset 10}
+#${color8}${rss http://connie.slackware.com/~alien/multilib/ChangeLog.rss 30 item_title 3}${voffset 10}
+###
+### KTOWN
+${color4}KTOWN${voffset 2}
+#${color5}${rss http://bear.alienbase.nl/mirrors/alien-kde/ChangeLog.rss 30 feed_title}${voffset 10}
+${color8}${rss http://bear.alienbase.nl/mirrors/alien-kde/ChangeLog.rss 29 item_titles 1}${voffset 10}
+#${color8}${rss http://bear.alienbase.nl/mirrors/alien-kde/ChangeLog.rss 30 item_title 2}${voffset 10}
+#${color8}${rss http://bear.alienbase.nl/mirrors/alien-kde/ChangeLog.rss 30 item_title 3}${voffset 10}
+###
+### RESTRICTED
+${color4}RESTRICTED${voffset 2}
+#${color5}${rss http://taper.alienbase.nl/mirrors/people/alien/restricted_sbrepos/ChangeLog.rss 30 feed_title}${voffset 10}
+${color8}${rss http://taper.alienbase.nl/mirrors/people/alien/restricted_sbrepos/ChangeLog.rss 29 item_titles 1}${voffset 10}
+#${color8}${rss http://taper.alienbase.nl/mirrors/people/alien/restricted_sbrepos/ChangeLog.rss 30 item_title 2}${voffset 10}
+#${color8}${rss http://taper.alienbase.nl/mirrors/people/alien/restricted_sbrepos/ChangeLog.rss 30 item_title 3}${voffset 10}
+###
+### SLACKBUILDS
+${color4}SLACKBUILDS${voffset 2}
+${color8}${execi 1800 cat /home/liber/Sistema/Scripts/Changelog_SBo.txt | head -n 1}${voffset 10}
+#${color5}${rss https://slackbuilds.org/rss/ChangeLog.rss 30 feed_title}${voffset 10}
+#${color8}${rss https://slackbuilds.org/rss/ChangeLog.rss 29 item_titles 1}${voffset 10}
+#${color8}${rss https://slackbuilds.org/rss/ChangeLog.rss 30 item_title 2}${voffset 10}
+#${color8}${rss https://slackbuilds.org/rss/ChangeLog.rss 30 item_title 3}${voffset 10}
+###
+### ACTUALIZADO EN -current
+${color0}CHANGELOG -current${voffset 2}
+${color8}${execi 1800 cat /home/liber/Sistema/Scripts/Changelog.txt} ${voffset 10}
+###
+### PAQUETES ACTUALIZADOS
+${color0}ÚLTIMOS ACTUALIZADOS${voffset 2}
+${color8}${execi 2100 ls -ltr /var/log/packages/ | tail -n 5 | awk '{print $6,$7,$8,$9}'} ${voffset 10}
+###
+### PAQUETES
+${color4}PAQUETES${voffset 2}
+${color8}Instalados ${alignr}${color8}${execi 2400 ls -ltr /var/log/packages/ | wc -l}
+${color8}Current ${alignr}${color8}${execi 2430 ls -ltr /var/log/packages/ | grep -v -e alien -e compat32 -e SBo | wc -l}
+${color8}Alien + Ktown + Restricted ${alignr}${color8}${execi 2460 ls -ltr /var/log/packages/ | grep alien | wc -l}
+${color8}Multilib (compat32) ${alignr}${color8}${execi 2490 ls -ltr /var/log/packages/ | grep compat32 | wc -l}
+${color8}Slackbuilds SBo ${alignr}${color8}${execi 2520 ls -ltr /var/log/packages/ | grep SBo | wc -l}
+###

@@ -1,0 +1,78 @@
+# Slackware Conky Google Now Dark style #
+
+# Conky settings #
+background no
+update_interval 3
+double_buffer yes
+no_buffers yes
+
+# Window specifications #
+own_window yes
+own_window_class Conky
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar
+own_window_transparent no
+own_window_argb_visual yes
+own_window_argb_value 150
+
+minimum_size 834
+maximum_width 705
+
+# Alignment #
+alignment top_left
+gap_x 23
+gap_y 52
+
+border_inner_margin 15
+border_outer_margin 0
+
+# Graphics settings #
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+xftalpha 0.2
+xftfont Open Sans Light:size=10
+# xftfont pftempestafivecondensed:size=12
+
+override_utf8_locale yes
+
+imlib_cache_size 0
+
+# Color scheme - Tango Palette #
+default_color BABDB6 # aluminium
+
+color1 C4A000 # butter
+color2 CE5C00 # orange
+color3 8F5902 # chocolate
+#color4 4E9A06 # chamemelon
+color4 FFFFFF # blanco
+color5 204A87 # skyblue
+color6 5C3566 # Plum
+color7 CC0000 # scarlet red
+color8 BABDB6 # aluminium
+color9 A23436 # oil
+color0 55ff00 # green
+
+TEXT
+### LOG DE TODO LO IMPORTANTE (/var/log/all.log)
+${color4}LOG DEL SISTEMA ${color}${voffset 2}
+${tail /var/log/all.log 20}
+${voffset 10}
+#
+### LECTURA Y ESCRITURA DE DISCO
+${color4}ÚLTIMOS ARCHIVOS MODIFICADOS${color}${voffset 2}
+${execi 300 find /home/liber -type f -mtime 0 -exec ls -gGh --full-time '{}' \; | cut -d ' ' -f 4,5,7 | sort | tail -5}${voffset 10}
+# ${alignr}${diskiograph sda 20,210 BABDB6 204A87 -t}${voffset -5} 
+# ${alignr}Lectura ${diskio_read sda} - Escritura ${diskio_write sda} 
+# ${voffset 10}
+#
+### ATAJOS DE TECLADO
+# ${color4}ATAJOS DE TECLADO${color}${voffset 2}
+# ALT+F1 = Menú general ${goto 250}ALT+F5 = Dashboard ${goto 500}ALT+F9 = Menú general
+# ALT+F2 = Lanzador de aplicaciones ${goto 250}ALT+F6 = Lista de ventanas ${goto 500}ALT+F10 = Ver Escritorios
+# ALT+F3 = Menú de ventana activa ${goto 250}ALT+F7 = - ${goto 500}ALT+F11 = Ver Ventanas
+# ALT+F4 = Cerrar ventana activa ${goto 250}ALT+F8 = Cerrar sesión ${goto 500}ALT+F12 = -
